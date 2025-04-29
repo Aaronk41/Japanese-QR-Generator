@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QRジェネレーター - Japanese QR Demo</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        body { font-family: "MS Gothic", sans-serif; max-width: 600px; margin: 0 auto; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        #qrcode { margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>日本語QRコード生成</h1>
+    <textarea id="text-input" placeholder="日本語のテキストやURLを入力..."></textarea>
+    <button onclick="generateQR()">QRコードを作成</button>
+    <div id="qrcode"></div>
+
+    <script>
+        function generateQR() {
+            const text = document.getElementById("text-input").value;
+            if (!text) return alert("テキストを入力してください！");
+            
+            // Clear previous QR
+            document.getElementById("qrcode").innerHTML = "";
+            
+            // Generate client-side (or fetch from your FastAPI backend)
+            new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    </script>
+</body>
+</html>
